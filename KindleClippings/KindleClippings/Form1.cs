@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Threading;
 using Entity;
 using Core;
 
@@ -18,25 +19,18 @@ namespace KindleClippings
         public Form1()
         {
             InitializeComponent();
-            populateDataGridView();
         }
 
         public readonly Manager Joe = new Manager();
 
         List<Clipping> list;
 
-        // Choose Clippping.txt
-        private void button1_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                Joe.readFromFile(openFileDialog1.FileName);
-            }
-            else
-            {
-            }
+            populateDataGridView();
         }
 
+        // Populate dataGridView1
         private void populateDataGridView()
         {
             Int32 i = 0,
@@ -97,6 +91,62 @@ namespace KindleClippings
             }
 
 
+        }
+
+        // Open file
+        private void ItemFile_Open_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Joe.readFromFile(openFileDialog1.FileName);
+            }
+            else
+            {
+            }
+        }
+
+        // Exit
+        private void ItemFile_Exit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void copySelectedRowsToClipboard(DataGridView dgv)
+        {
+            dgv.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+
+            Clipboard.Clear();
+            if (dgv.GetClipboardContent() != null)
+            {
+                Clipboard.SetDataObject(dgv.GetClipboardContent());
+                Clipboard.GetData(DataFormats.Text);
+                IDataObject dt = Clipboard.GetDataObject();
+                if (dt.GetDataPresent(typeof(string)))
+                {
+                    string tb = (string)(dt.GetData(typeof(string)));
+                    Encoding encoding = Encoding.GetEncoding(1251);
+                    byte[] dataStr = encoding.GetBytes(tb);
+                    Clipboard.SetDataObject(encoding.GetString(dataStr));
+                }
+            }
+            dgv.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
+        }
+
+        private void ItemCopyToClipboard_Click(object sender, EventArgs e)
+        {
+            if (this.dataGridView2
+                .GetCellCount(DataGridViewElementStates.Selected) > 0)
+            {
+                try
+                {
+                    // Add the selection to the clipboard.
+                    Clipboard.SetDataObject(
+                        this.dataGridView2.GetClipboardContent());
+                }
+                catch (System.Runtime.InteropServices.ExternalException)
+                {
+                }
+            }
         }
     }
 }

@@ -28,25 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.title = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.text = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuDGV2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ItemCopyToClipboard = new System.Windows.Forms.ToolStripMenuItem();
+            this.ItemOpen = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuDGV1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ItemSaveToFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.ItemFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.ItemFile_Open = new System.Windows.Forms.ToolStripMenuItem();
+            this.ItemFile_Exit = new System.Windows.Forms.ToolStripMenuItem();
+            this.ItemFile_Save = new System.Windows.Forms.ToolStripMenuItem();
+            this.title = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.contextMenuDGV2.SuspendLayout();
+            this.contextMenuDGV1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(13, 40);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Открыть";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // openFileDialog1
             // 
@@ -54,32 +58,38 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToOrderColumns = true;
+            this.dataGridView1.AllowUserToResizeColumns = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.title});
-            this.dataGridView1.Location = new System.Drawing.Point(13, 69);
+            this.dataGridView1.ContextMenuStrip = this.contextMenuDGV1;
+            this.dataGridView1.Location = new System.Drawing.Point(13, 36);
+            this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(241, 328);
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dataGridView1.Size = new System.Drawing.Size(373, 468);
             this.dataGridView1.TabIndex = 3;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // dataGridView2
             // 
+            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.text});
-            this.dataGridView2.Location = new System.Drawing.Point(260, 69);
+            this.dataGridView2.ContextMenuStrip = this.contextMenuDGV2;
+            this.dataGridView2.Location = new System.Drawing.Point(392, 36);
             this.dataGridView2.MultiSelect = false;
             this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(852, 328);
+            this.dataGridView2.RowHeadersVisible = false;
+            this.dataGridView2.Size = new System.Drawing.Size(720, 468);
             this.dataGridView2.TabIndex = 4;
-            // 
-            // title
-            // 
-            this.title.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.title.HeaderText = "Книги";
-            this.title.Name = "title";
-            this.title.Width = 161;
             // 
             // text
             // 
@@ -87,30 +97,130 @@
             this.text.HeaderText = "Цитаты";
             this.text.Name = "text";
             // 
+            // contextMenuDGV2
+            // 
+            this.contextMenuDGV2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ItemOpen,
+            this.ItemCopyToClipboard});
+            this.contextMenuDGV2.Name = "contextMenuDGV2";
+            this.contextMenuDGV2.Size = new System.Drawing.Size(195, 70);
+            // 
+            // ItemCopyToClipboard
+            // 
+            this.ItemCopyToClipboard.Name = "ItemCopyToClipboard";
+            this.ItemCopyToClipboard.Size = new System.Drawing.Size(194, 22);
+            this.ItemCopyToClipboard.Text = "Копировать (в буфер)";
+            this.ItemCopyToClipboard.Click += new System.EventHandler(this.ItemCopyToClipboard_Click);
+            // 
+            // ItemOpen
+            // 
+            this.ItemOpen.Name = "ItemOpen";
+            this.ItemOpen.Size = new System.Drawing.Size(194, 22);
+            this.ItemOpen.Text = "Открыть";
+            // 
+            // contextMenuDGV1
+            // 
+            this.contextMenuDGV1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ItemSaveToFile});
+            this.contextMenuDGV1.Name = "contextMenuDGV1";
+            this.contextMenuDGV1.Size = new System.Drawing.Size(163, 26);
+            // 
+            // ItemSaveToFile
+            // 
+            this.ItemSaveToFile.Name = "ItemSaveToFile";
+            this.ItemSaveToFile.Size = new System.Drawing.Size(162, 22);
+            this.ItemSaveToFile.Text = "Сохранить как...";
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ItemFile});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1124, 24);
+            this.menuStrip1.TabIndex = 7;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // ItemFile
+            // 
+            this.ItemFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ItemFile_Open,
+            this.ItemFile_Save,
+            this.ItemFile_Exit});
+            this.ItemFile.Name = "ItemFile";
+            this.ItemFile.Size = new System.Drawing.Size(48, 20);
+            this.ItemFile.Text = "Файл";
+            // 
+            // ItemFile_Open
+            // 
+            this.ItemFile_Open.Name = "ItemFile_Open";
+            this.ItemFile_Open.Size = new System.Drawing.Size(162, 22);
+            this.ItemFile_Open.Text = "Открыть";
+            this.ItemFile_Open.Click += new System.EventHandler(this.ItemFile_Open_Click);
+            // 
+            // ItemFile_Exit
+            // 
+            this.ItemFile_Exit.Name = "ItemFile_Exit";
+            this.ItemFile_Exit.Size = new System.Drawing.Size(162, 22);
+            this.ItemFile_Exit.Text = "Выход";
+            this.ItemFile_Exit.Click += new System.EventHandler(this.ItemFile_Exit_Click);
+            // 
+            // ItemFile_Save
+            // 
+            this.ItemFile_Save.Name = "ItemFile_Save";
+            this.ItemFile_Save.Size = new System.Drawing.Size(162, 22);
+            this.ItemFile_Save.Text = "Сохранить как...";
+            // 
+            // title
+            // 
+            this.title.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.title.FillWeight = 370F;
+            this.title.HeaderText = "Книги";
+            this.title.Name = "title";
+            this.title.ReadOnly = true;
+            this.title.Width = 370;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1124, 409);
+            this.ClientSize = new System.Drawing.Size(1124, 517);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.button1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "KindleClippings";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.contextMenuDGV2.ResumeLayout(false);
+            this.contextMenuDGV1.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn title;
         private System.Windows.Forms.DataGridViewTextBoxColumn text;
+        private System.Windows.Forms.ContextMenuStrip contextMenuDGV2;
+        private System.Windows.Forms.ToolStripMenuItem ItemCopyToClipboard;
+        private System.Windows.Forms.ToolStripMenuItem ItemOpen;
+        private System.Windows.Forms.ContextMenuStrip contextMenuDGV1;
+        private System.Windows.Forms.ToolStripMenuItem ItemSaveToFile;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem ItemFile;
+        private System.Windows.Forms.ToolStripMenuItem ItemFile_Open;
+        private System.Windows.Forms.ToolStripMenuItem ItemFile_Save;
+        private System.Windows.Forms.ToolStripMenuItem ItemFile_Exit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn title;
     }
 }
 
