@@ -148,5 +148,25 @@ namespace KindleClippings
                 }
             }
         }
+
+        public void openElementForm()
+        {
+            ElementForm Form = new ElementForm();
+
+            Form.title = this.dataGridView1.SelectedCells[0].Value.ToString();
+            Form.text = this.dataGridView2.SelectedCells[0].Value.ToString();
+
+            Form.ShowDialog();
+        }
+
+        private void ItemOpen_Click(object sender, EventArgs e)
+        {
+            openElementForm();
+        }
+
+        private void dataGridView2_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            openElementForm();
+        }
     }
 }
