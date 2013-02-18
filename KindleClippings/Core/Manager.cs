@@ -73,6 +73,23 @@ namespace Core
         {
             return _db.GetAll();
         }
+
+        public List<Clipping> getBookClippings(string title)
+        {
+            return _db.GetBookClippings(title);
+        }
+
+        public bool existBase()
+        {
+            if(File.Exists(_dbName))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         ///////////////////////////////////
 
         ///////////////////////////////////
@@ -134,15 +151,21 @@ namespace Core
                     {
                         if (line == endClipping)
                         {
-                            var clip = new Clipping();
-                            clip.Id = Id;
-                            clip.title = nameBook;
-                            clip.text = textClipping;
+                            // Отсекаем пустые вырезки
+                            if (!String.IsNullOrWhiteSpace(textClipping))
+                            {
+                                var clip = new Clipping();
+                                clip.Id = Id;
+                                clip.title = nameBook;
+                                clip.text = textClipping;
 
-                            list.Add(clip);
+                                list.Add(clip);
+                            }
 
                             nameFl = true;
                             Id++;
+
+                            nameBook = "";
                             textClipping = "";
                         }
                         else
@@ -201,6 +224,73 @@ namespace Core
         {
             list.OrderBy(x => x.title).ToList();
         }
+
+        public void saveBaseToFile(string path)
+        {
+            List<Clipping> list = getDB();
+            var sortedClippings =
+                from element in list
+                group element by element.title into newGroup
+                orderby newGroup.Key
+                select newGroup;
+
+            //Запись в файл
+            try
+            {
+                using (var streamWriter = new StreamWriter(path, false, Encoding.GetEncoding(1251)))
+                {
+
+                    foreach (var elem in sortedClippings)
+                    {
+                        streamWriter.WriteLine("Book: " + elem.Key + "\n");
+                        foreach (var clipping in elem)
+                        {
+                            streamWriter.WriteLine("- " + clipping.text + "\n");
+                            streamWriter.WriteLine("\n");
+                        }
+
+                    }
+                    streamWriter.Close();
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        public void saveBookClippingsToFile(string path, string title)
+        {
+            List<Clipping> list = getBookClippings(title);
+            var sortedClippings =
+                from element in list
+                group element by element.title into newGroup
+                orderby newGroup.Key
+                select newGroup;
+
+            //Запись в файл
+            try
+            {
+                using (var streamWriter = new StreamWriter(path, false, Encoding.GetEncoding(1251)))
+                {
+
+                    foreach (var elem in sortedClippings)
+                    {
+                        streamWriter.WriteLine("Book: " + elem.Key + "\n");
+                        foreach (var clipping in elem)
+                        {
+                            streamWriter.WriteLine("- " + clipping.text + "\n");
+                            streamWriter.WriteLine("\n");
+                        }
+
+                    }
+                    streamWriter.Close();
+                }
+            }
+            catch
+            {
+            }
+
+        }
         ///////////////////////////////////
-    }
+        }
 }

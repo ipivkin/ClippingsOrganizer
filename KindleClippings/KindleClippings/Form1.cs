@@ -33,72 +33,83 @@ namespace KindleClippings
         // Populate dataGridView1
         private void populateDataGridView()
         {
-            Int32 i = 0,
-                  j = 0;
-
-            list = Joe.getDB();
-
-            var sortedClippings =
-                from element in list
-                group element by element.title into newGroup
-                orderby newGroup.Key
-                select newGroup;
-
-            foreach (var elem in sortedClippings)
+            if (Joe.existBase())
             {
-                this.dataGridView1.Rows.Add();
-                dataGridView1.Rows[i].Cells[0].Value = elem.Key;
+                Int32 index = 0,
+                      j = 0;
 
-                if (i == 0)
+                list = Joe.getDB();
+
+                var sortedClippings =
+                    from element in list
+                    group element by element.title into newGroup
+                    orderby newGroup.Key
+                    select newGroup;
+
+                dataGridView1.Rows[index].Cells[0].Value = sortedClippings.ElementAt(index).Key;
+
+                for (index = 1; index < sortedClippings.Count(); index++)
                 {
-                    foreach (var clipping in elem)
-                    {
-                        this.dataGridView2.Rows.Add();
-                        dataGridView2.Rows[j].Cells[0].Value = clipping.text;
 
-                        j++;
-                    }
+                    DataGridViewRow row = (DataGridViewRow)this.dataGridView1.Rows[0].Clone();
+                    row.Cells[0].Value = sortedClippings.ElementAt(index).Key;
+                    this.dataGridView1.Rows.Add(row);
+
                 }
 
-                i++;
+                foreach (var clipping in sortedClippings.ElementAt(index-2))
+                {
+                    this.dataGridView2.Rows.Add();
+                    dataGridView2.Rows[j].Cells[0].Value = clipping.text;
+
+                    j++;
+                }
+
+            }
+            else
+            {
             }
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            this.dataGridView2.Rows.Clear();
-            this.dataGridView2.Refresh();
-
-            var sortedClippings =
-                from element in list
-                group element by element.title into newGroup
-                orderby newGroup.Key
-                where newGroup.Key == dataGridView1.Rows[e.RowIndex].Cells["title"].Value
-                select newGroup;
-
-            Int32 i = 0;
-
-            foreach (var elem in sortedClippings)
+            if (this.dataGridView1.Rows[e.RowIndex].Cells["title"].Value != null)
             {
+                this.dataGridView2.Rows.Clear();
+                this.dataGridView2.Refresh();
 
-                foreach (var clipping in elem)
+                var sortedClippings =
+                    from element in list
+                    group element by element.title into newGroup
+                    orderby newGroup.Key
+                    where newGroup.Key == dataGridView1.Rows[e.RowIndex].Cells["title"].Value
+                    select newGroup;
+
+                Int32 i = 0;
+
+                foreach (var elem in sortedClippings)
                 {
-                    this.dataGridView2.Rows.Add();
-                    dataGridView2.Rows[i].Cells[0].Value = clipping.text;
 
-                    i++;
+                    foreach (var clipping in elem)
+                    {
+                        this.dataGridView2.Rows.Add();
+                        dataGridView2.Rows[i].Cells[0].Value = clipping.text;
+
+                        i++;
+                    }
                 }
             }
-
-
         }
 
         // Open file
         private void ItemFile_Open_Click(object sender, EventArgs e)
         {
+            openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            openFileDialog1.FileName = "My Clippings.txt";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 Joe.readFromFile(openFileDialog1.FileName);
+                populateDataGridView();
             }
             else
             {
@@ -167,6 +178,32 @@ namespace KindleClippings
         private void dataGridView2_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             openElementForm();
+        }
+
+        private void ItemFile_Save_Click(object sender, EventArgs e)
+        {
+            Joe.saveBaseToFile(createTextBasePath().ToString());
+
+        }
+
+        private string createTextBasePath()
+        {
+            saveFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialog1.FileName = "*.txt";
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                return saveFileDialog1.FileName;
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+        private void ItemSaveToFile_Click(object sender, EventArgs e)
+        {
+            Joe.saveBookClippingsToFile(createTextBasePath().ToString(), this.dataGridView1.SelectedCells[0].Value.ToString());
+
         }
     }
 }

@@ -80,18 +80,38 @@ namespace Data
         // Return DB as list
         public List<Clipping> GetAll()
         {
+
             doc = XDocument.Load(fileName);
             List<Clipping> list = new List<Clipping>();
             foreach (XElement el in doc.Root.Elements())
             {
                 Clipping elem = new Clipping();
-                elem.Id= Convert.ToInt32(el.Attribute("id").Value);
+                elem.Id = Convert.ToInt32(el.Attribute("id").Value);
 
                 elem.title = el.Element("title").Value;
                 elem.text = el.Element("text").Value;
 
                 list.Add(elem);
             }
+
+            return list;
+        }
+
+        public List<Clipping> GetBookClippings(string title)
+        {
+            doc = XDocument.Load(fileName);
+            List<Clipping> list = new List<Clipping>();
+            foreach (XElement el in doc.Root.Elements().Where(x => x.Element("title").Value == title))
+            {
+                Clipping elem = new Clipping();
+                elem.Id = Convert.ToInt32(el.Attribute("id").Value);
+
+                elem.title = el.Element("title").Value;
+                elem.text = el.Element("text").Value;
+
+                list.Add(elem);
+            }
+
             return list;
         }
     }

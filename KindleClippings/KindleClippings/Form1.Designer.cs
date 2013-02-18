@@ -45,6 +45,7 @@
             this.ItemFile_Open = new System.Windows.Forms.ToolStripMenuItem();
             this.ItemFile_Save = new System.Windows.Forms.ToolStripMenuItem();
             this.ItemFile_Exit = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuDGV1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -63,6 +64,7 @@
             this.dataGridView1.AllowUserToResizeColumns = false;
             this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.title});
@@ -98,10 +100,12 @@
             this.ItemSaveToFile.Name = "ItemSaveToFile";
             this.ItemSaveToFile.Size = new System.Drawing.Size(162, 22);
             this.ItemSaveToFile.Text = "Сохранить как...";
+            this.ItemSaveToFile.Click += new System.EventHandler(this.ItemSaveToFile_Click);
             // 
             // dataGridView2
             // 
             this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.text});
@@ -167,20 +171,21 @@
             // ItemFile_Open
             // 
             this.ItemFile_Open.Name = "ItemFile_Open";
-            this.ItemFile_Open.Size = new System.Drawing.Size(162, 22);
+            this.ItemFile_Open.Size = new System.Drawing.Size(189, 22);
             this.ItemFile_Open.Text = "Открыть";
             this.ItemFile_Open.Click += new System.EventHandler(this.ItemFile_Open_Click);
             // 
             // ItemFile_Save
             // 
             this.ItemFile_Save.Name = "ItemFile_Save";
-            this.ItemFile_Save.Size = new System.Drawing.Size(162, 22);
-            this.ItemFile_Save.Text = "Сохранить как...";
+            this.ItemFile_Save.Size = new System.Drawing.Size(189, 22);
+            this.ItemFile_Save.Text = "Сохранить базу как...";
+            this.ItemFile_Save.Click += new System.EventHandler(this.ItemFile_Save_Click);
             // 
             // ItemFile_Exit
             // 
             this.ItemFile_Exit.Name = "ItemFile_Exit";
-            this.ItemFile_Exit.Size = new System.Drawing.Size(162, 22);
+            this.ItemFile_Exit.Size = new System.Drawing.Size(189, 22);
             this.ItemFile_Exit.Text = "Выход";
             this.ItemFile_Exit.Click += new System.EventHandler(this.ItemFile_Exit_Click);
             // 
@@ -225,6 +230,7 @@
         private System.Windows.Forms.ToolStripMenuItem ItemFile_Save;
         private System.Windows.Forms.ToolStripMenuItem ItemFile_Exit;
         private System.Windows.Forms.DataGridViewTextBoxColumn title;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 

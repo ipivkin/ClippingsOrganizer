@@ -14,5 +14,6 @@ namespace Data
         void Update(Int32 id, Clipping element);
         void Delete(Int32 id);
         List<Clipping> GetAll();
+        List<Clipping> GetBookClippings(string title);
     }
 }
