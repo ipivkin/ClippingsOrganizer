@@ -27,7 +27,17 @@ namespace KindleClippings
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            #region Показ окна "Загрузка.."
+            Loading.LoadingClass lc = new Loading.LoadingClass(ActiveForm, new LoadingForm());
+            Thread thr_load = new System.Threading.Thread(lc.loading_thread);
+            thr_load.Start();
+            #endregion
+
             populateDataGridView();
+
+            #region Убираем окно "Загрузка.."
+            thr_load.Abort();
+            #endregion            
         }
 
         // Populate dataGridView1
@@ -54,13 +64,15 @@ namespace KindleClippings
                     DataGridViewRow row = (DataGridViewRow)this.dataGridView1.Rows[0].Clone();
                     row.Cells[0].Value = sortedClippings.ElementAt(index).Key;
                     this.dataGridView1.Rows.Add(row);
+                    
 
                 }
 
                 foreach (var clipping in sortedClippings.ElementAt(index-2))
                 {
                     this.dataGridView2.Rows.Add();
-                    dataGridView2.Rows[j].Cells[0].Value = clipping.text;
+                    this.dataGridView2.Rows[j].Cells[0].Value = j + 1;
+                    this.dataGridView2.Rows[j].Cells[1].Value = clipping.text;
 
                     j++;
                 }
@@ -93,7 +105,8 @@ namespace KindleClippings
                     foreach (var clipping in elem)
                     {
                         this.dataGridView2.Rows.Add();
-                        dataGridView2.Rows[i].Cells[0].Value = clipping.text;
+                        this.dataGridView2.Rows[i].Cells[0].Value = i + 1;
+                        this.dataGridView2.Rows[i].Cells[1].Value = clipping.text;
 
                         i++;
                     }
@@ -108,8 +121,18 @@ namespace KindleClippings
             openFileDialog1.FileName = "My Clippings.txt";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                #region Показ окна "Загрузка.."
+                Loading.LoadingClass lc = new Loading.LoadingClass(ActiveForm, new LoadingForm());
+                Thread thr_load = new System.Threading.Thread(lc.loading_thread);
+                thr_load.Start();
+                #endregion
+
                 Joe.readFromFile(openFileDialog1.FileName);
                 populateDataGridView();
+
+                #region Убираем окно "Загрузка.."
+                thr_load.Abort();
+                #endregion   
             }
             else
             {

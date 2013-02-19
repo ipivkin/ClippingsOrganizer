@@ -25,5 +25,19 @@ namespace Entity
             this.labelTitle.Text = this.title;
             this.richTextBox1.AppendText(this.text);
         }
+
+        private void копироватьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.richTextBox1.SelectedText.Count() > 0)
+            {
+                try
+                {
+                    Clipboard.SetText(this.richTextBox1.Text);
+                }
+                catch (System.Runtime.InteropServices.ExternalException)
+                {
+                }
+            }
+        }
     }
 }

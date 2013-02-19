@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -36,7 +37,6 @@
             this.contextMenuDGV1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ItemSaveToFile = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.text = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuDGV2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ItemOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.ItemCopyToClipboard = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,6 +46,8 @@
             this.ItemFile_Save = new System.Windows.Forms.ToolStripMenuItem();
             this.ItemFile_Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.Index = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.text = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuDGV1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -65,6 +67,7 @@
             this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.title});
@@ -104,27 +107,37 @@
             // 
             // dataGridView2
             // 
+            this.dataGridView2.AllowUserToDeleteRows = false;
+            this.dataGridView2.AllowUserToOrderColumns = true;
+            this.dataGridView2.AllowUserToResizeColumns = false;
+            this.dataGridView2.AllowUserToResizeRows = false;
             this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dataGridView2.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dataGridView2.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Index,
             this.text});
             this.dataGridView2.ContextMenuStrip = this.contextMenuDGV2;
             this.dataGridView2.Location = new System.Drawing.Point(392, 36);
             this.dataGridView2.MultiSelect = false;
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
+            this.dataGridView2.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView2.RowHeadersVisible = false;
+            this.dataGridView2.RowHeadersWidth = 15;
             this.dataGridView2.Size = new System.Drawing.Size(720, 468);
             this.dataGridView2.TabIndex = 4;
             this.dataGridView2.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellDoubleClick);
-            // 
-            // text
-            // 
-            this.text.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.text.HeaderText = "Цитаты";
-            this.text.Name = "text";
-            this.text.ReadOnly = true;
             // 
             // contextMenuDGV2
             // 
@@ -189,11 +202,26 @@
             this.ItemFile_Exit.Text = "Выход";
             this.ItemFile_Exit.Click += new System.EventHandler(this.ItemFile_Exit_Click);
             // 
+            // Index
+            // 
+            this.Index.FillWeight = 10.15228F;
+            this.Index.HeaderText = "№";
+            this.Index.Name = "Index";
+            this.Index.ReadOnly = true;
+            // 
+            // text
+            // 
+            this.text.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.text.FillWeight = 189.8477F;
+            this.text.HeaderText = "Цитаты";
+            this.text.Name = "text";
+            this.text.ReadOnly = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1124, 517);
+            this.ClientSize = new System.Drawing.Size(1124, 532);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.dataGridView1);
@@ -218,7 +246,6 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn text;
         private System.Windows.Forms.ContextMenuStrip contextMenuDGV2;
         private System.Windows.Forms.ToolStripMenuItem ItemCopyToClipboard;
         private System.Windows.Forms.ToolStripMenuItem ItemOpen;
@@ -231,6 +258,8 @@
         private System.Windows.Forms.ToolStripMenuItem ItemFile_Exit;
         private System.Windows.Forms.DataGridViewTextBoxColumn title;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Index;
+        private System.Windows.Forms.DataGridViewTextBoxColumn text;
     }
 }
 
