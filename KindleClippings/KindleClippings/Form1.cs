@@ -228,5 +228,9 @@ namespace KindleClippings
             Joe.saveBookClippingsToFile(createTextBasePath().ToString(), this.dataGridView1.SelectedCells[0].Value.ToString());
 
         }
+
+        private void dataGridView1_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+        }
     }
 }

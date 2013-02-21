@@ -158,7 +158,7 @@ namespace Core
                                 clip.Id = Id;
                                 clip.title = nameBook;
                                 clip.text = textClipping;
-
+                                    
                                 list.Add(clip);
                             }
 

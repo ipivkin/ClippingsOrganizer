@@ -37,6 +37,8 @@
             this.contextMenuDGV1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ItemSaveToFile = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.Index = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.text = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuDGV2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ItemOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.ItemCopyToClipboard = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,8 +48,6 @@
             this.ItemFile_Save = new System.Windows.Forms.ToolStripMenuItem();
             this.ItemFile_Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.Index = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.text = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuDGV1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -72,7 +72,7 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.title});
             this.dataGridView1.ContextMenuStrip = this.contextMenuDGV1;
-            this.dataGridView1.Location = new System.Drawing.Point(13, 36);
+            this.dataGridView1.Location = new System.Drawing.Point(13, 27);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -81,6 +81,7 @@
             this.dataGridView1.Size = new System.Drawing.Size(373, 468);
             this.dataGridView1.TabIndex = 3;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dataGridView1.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dataGridView1_RowPrePaint);
             // 
             // title
             // 
@@ -120,7 +121,7 @@
             this.Index,
             this.text});
             this.dataGridView2.ContextMenuStrip = this.contextMenuDGV2;
-            this.dataGridView2.Location = new System.Drawing.Point(392, 36);
+            this.dataGridView2.Location = new System.Drawing.Point(392, 27);
             this.dataGridView2.MultiSelect = false;
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
@@ -138,6 +139,21 @@
             this.dataGridView2.Size = new System.Drawing.Size(720, 468);
             this.dataGridView2.TabIndex = 4;
             this.dataGridView2.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellDoubleClick);
+            // 
+            // Index
+            // 
+            this.Index.FillWeight = 10.15228F;
+            this.Index.HeaderText = "№";
+            this.Index.Name = "Index";
+            this.Index.ReadOnly = true;
+            // 
+            // text
+            // 
+            this.text.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.text.FillWeight = 189.8477F;
+            this.text.HeaderText = "Цитаты";
+            this.text.Name = "text";
+            this.text.ReadOnly = true;
             // 
             // contextMenuDGV2
             // 
@@ -202,26 +218,11 @@
             this.ItemFile_Exit.Text = "Выход";
             this.ItemFile_Exit.Click += new System.EventHandler(this.ItemFile_Exit_Click);
             // 
-            // Index
-            // 
-            this.Index.FillWeight = 10.15228F;
-            this.Index.HeaderText = "№";
-            this.Index.Name = "Index";
-            this.Index.ReadOnly = true;
-            // 
-            // text
-            // 
-            this.text.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.text.FillWeight = 189.8477F;
-            this.text.HeaderText = "Цитаты";
-            this.text.Name = "text";
-            this.text.ReadOnly = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1124, 532);
+            this.ClientSize = new System.Drawing.Size(1124, 507);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.dataGridView1);
